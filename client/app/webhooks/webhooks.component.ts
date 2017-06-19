@@ -19,9 +19,10 @@ export class WebhooksComponent implements OnInit {
   isEditing = false;
 
   addWebhookForm: FormGroup;
+
   name = new FormControl('', Validators.required);
-  age = new FormControl('', Validators.required);
-  weight = new FormControl('', Validators.required);
+  description = new FormControl('');
+  url = new FormControl('');
 
   constructor(private auth: AuthService,
               private webhookService: WebhookService,
@@ -33,8 +34,7 @@ export class WebhooksComponent implements OnInit {
     this.getWebhooks();
     this.addWebhookForm = this.formBuilder.group({
       name: this.name,
-      age: this.age,
-      weight: this.weight
+      description: this.description
     });
   }
 
@@ -52,7 +52,7 @@ export class WebhooksComponent implements OnInit {
         const newWebhook = res.json();
         this.webhooks.push(newWebhook);
         this.addWebhookForm.reset();
-        this.toast.setMessage('item added successfully.', 'success');
+        this.toast.setMessage('Webhook registered successfully.', 'success');
       },
       error => console.log(error)
     );

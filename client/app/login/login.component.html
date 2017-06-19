@@ -4,9 +4,9 @@
   <h4 class="card-header">Login</h4>
   <div class="card-block">
     <form [formGroup]="loginForm" (ngSubmit)="login()">
-      <div class="input-group" [ngClass]="setClassEmail()">
+      <div class="input-group" [ngClass]="setClassUsername()">
         <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-        <input class="form-control" type="email" name="email" formControlName="email" placeholder="Email" autofocus>
+        <input class="form-control" type="text" name="username" formControlName="username" placeholder="Username" autofocus>
       </div>
       <div class="input-group" [ngClass]="setClassPassword()">
         <span class="input-group-addon"><i class="fa fa-key"></i></span>
