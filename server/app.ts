@@ -5,6 +5,7 @@ import * as morgan from 'morgan';
 import * as mongoose from 'mongoose';
 import * as path from 'path';
 import * as https from 'https';
+import * as http from 'http';
 import * as fs from  'fs';
 import * as cookieParser from 'cookie-parser';
 import * as passport from 'passport';
@@ -39,10 +40,12 @@ const MongoStore= mongoStore(session);
 app.use(session({
     secret: process.env.SESSION_SECRETE,
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: true,
     cookie: {
-      secure: true,
-      maxAge: 1000*3600*24*2
+      path: '/',
+      httpOnly: true,
+      secure: false,
+      maxAge: 30 * 24 * 60 * 60 * 1000
     },
     store: new MongoStore({
       url: process.env.MONGODB_URI,
@@ -75,9 +78,15 @@ db.once('open', () => {
     res.sendFile(path.join(__dirname, '../public/index.html'));
   });
 
+  /*let httpServer = http.createServer(app).listen(app.get('port'), () => {
+    console.log('HTTP server is listening on port ' + app.get('port'));
+  });*/
+  app.listen(app.get('port'), () => {
+    console.log('Angular Full Stack listening on port ' + app.get('port'));
+  });
   // Setting up Https Server
-  let httpsServer = https.createServer(credentials, app).listen(app.get('port'), () => {
-  	console.log('HTTPS secure server is listening on port ' + app.get('port'));
+  let httpsServer = https.createServer(credentials, app).listen(app.get('port')+1, () => {
+  	console.log('HTTPS secure server is listening on port ' + (app.get('port') + 1));
   });
 });
 

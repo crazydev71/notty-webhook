@@ -10,7 +10,7 @@ export default class WebhookCtrl{
 
 // Get All Webhooks
   getAll = (req, res) => {
-  	this.model.find({user: req.user._id}, (err, docs) => {
+  	this.model.find({user: req.params.user}, (err, docs) => {
   		if (err) { return console.error(err); }
   		res.json(docs);
   	});
@@ -18,7 +18,7 @@ export default class WebhookCtrl{
 
 // Get a Webhook
   get = (req, res) => {
-  	this.model.findOne({user: req.user._id, _id: req.params.id}).populate('events').exec((err, obj) => {
+  	this.model.findOne({user: req.params.user, _id: req.params.id}).populate('events').exec((err, obj) => {
   		if (err) {return console.error(err);}
   		res.json(obj);
   	});
@@ -27,7 +27,7 @@ export default class WebhookCtrl{
 // Insert Webhook
   insert = (req, res) => {
   	const obj = new this.model(req.body);
-  	obj.user = req.user._id;
+  	obj.user = req.params.user;
 
   	obj.save((err, item) => {
   		if (err && err.code === 11000) {
@@ -46,7 +46,7 @@ export default class WebhookCtrl{
 
 // Edit webhook
   update = (req, res) => {
-  	this.model.findOneAndUpdate({user:req.user._id, _id: req.params._id}, req.body, (err, item) => {
+  	this.model.findOneAndUpdate({user:req.params.user, _id: req.params.id}, req.body, (err, item) => {
   		if (err) { return console.error(err); }
   			res.json(item);
   	})

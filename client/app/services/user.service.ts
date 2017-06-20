@@ -8,7 +8,7 @@ import 'rxjs/add/operator/map';
 export class UserService {
 
   private headers = new Headers({ 'Content-Type': 'application/json', 'charset': 'UTF-8' });
-  private options = new RequestOptions({ headers: this.headers });
+  private options = new RequestOptions({ headers: this.headers, withCredentials: true });
 
   constructor(private http: Http) { }
 
