@@ -11,27 +11,30 @@
           <th>Name</th>
           <th>Description</th>
           <th>URL</th>
+          <th>Events</th>
           <th>Actions</th>
         </tr>
       </thead>
       <tbody *ngIf="webhooks.length === 0">
         <tr>
-          <td colspan="4">There are no webhooks registerd. Add a new webhook below.</td>
+          <td colspan="5">There are no webhooks registerd. Add a new webhook below.</td>
         </tr>  
       </tbody>
       <tbody *ngIf="!isEditing">
-        <tr *ngFor="let webhook of webhooks">
-          <td>{{webhook.name}}</td>
-          <td>{{webhook.description}}</td>
-          <td>{{webhook.url}}</td>
-          <td>
-            <button class="btn btn-sm btn-warning" (click)="enableEditing(webhook)"><i class="fa fa-pencil"></i> Edit</button> <button class="btn btn-sm btn-danger" (click)="deleteWebhook(webhook)"><i class="fa fa-trash"></i> Delete</button>
-          </td>
+        <tr *ngFor="let webhook of webhooks" [routerLink]="['/events',webhook._id]" class="webhook-item">
+         
+            <td>{{webhook.name}}</td>
+            <td>{{webhook.description}}</td>
+            <td>{{webhook.url}}</td>
+            <td>{{webhook.events.length}}</td>
+            <td>
+              <button class="btn btn-sm btn-warning" (click)="enableEditing(webhook)"><i class="fa fa-pencil"></i> Edit</button> <button class="btn btn-sm btn-danger" (click)="deleteWebhook(webhook)"><i class="fa fa-trash"></i> Delete</button>
+            </td>
         </tr>  
       </tbody>
       <tbody *ngIf="isEditing">
         <tr>
-          <td colspan="4">
+          <td colspan="5">
             <form class="form-inline" #form="ngForm" (ngSubmit)="editWebhook(webhook)" style="display:inline">
               <div class="form-group">
                   <input class="form-control" type="text" name="name" [(ngModel)]="webhook.name" placeholder="Name" required>
@@ -41,6 +44,9 @@
               </div>
               <div class="form-group">
                   <input class="form-control" type="text" name="url" [(ngModel)]="webhook.url" placeholder="Url" readonly>
+              </div>
+              <div class="form-group">
+                  <input class="form-control" type="text" placeholder="Events" value="{{webhook.events.length}}" readonly>
               </div>
               <button class="btn btn-sm btn-primary" type="submit" [disabled]="!form.form.valid"><i class="fa fa-floppy-o"></i> Save</button>
             </form>

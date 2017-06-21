@@ -1,0 +1,43 @@
+<app-loading [condition]="isLoading"></app-loading>
+
+<app-toast [message]="toast.message"></app-toast>
+
+<div class="card" *ngIf="!isLoading">
+  <h4 class="card-header">Received Events ({{events.length}})</h4>
+  <div class="card-block">
+    <div class="col-md-6">
+      <table class="table table-bordered table-striped">
+        <thead class="thead-default">
+          <tr>
+            <th colspan="2">
+              <select [ngModel]="webhook" (ngModelChange)="onWebhookChange($event)">
+                <option value="All" selected="selected">All</option>
+                <option *ngFor='let webhook of webhooks' [ngValue]="webhook" >{{webhook.name}}</option>
+              </select>
+            </th>
+          </tr>
+        </thead>
+        <tbody *ngIf="events.length === 0">
+          <tr>
+            <td colspan="2">There are no received events yet.</td>
+          </tr>  
+        </tbody>
+        <tbody>
+          <tr *ngFor="let item of events" class="event-item" [ngClass]="{'selected':this.event===item}">
+            <td (click)="onSelectEvent(item)"> {{item._id}} | {{item.created}} </td>
+            <td>
+              <button class="btn btn-sm btn-danger" (click)="deleteEvent(item)"><i class="fa fa-trash"></i> Delete</button>
+            </td>
+          </tr>  
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col-md-6">
+      <p> Event Herader Json View here</p>
+      <prettyjson [obj]="event?event.headers:{}" class="headers-viewer"></prettyjson>
+      <p> Event Payload Json View here</p>
+      <prettyjson [obj]="event?event.payloads:{}" class="payloads-viewer"></prettyjson>
+    </div>
+  </div>
+</div>

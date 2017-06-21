@@ -63,6 +63,14 @@ export default function setRoutes(app) {
   router.route('/webhook/:user/:id').get(webhookCtrl.get);
   router.route('/webhook/:user/:id').put(webhookCtrl.update);
   router.route('/webhook/:user/:id').delete(webhookCtrl.delete);
+
+    // Event
+  router.route('/events/:user').get(eventCtrl.getAll);
+  router.route('/events/:user/:webhook').get(eventCtrl.getEventsInWebhook);
+  router.route('/event/:user/:webhook/:id').get(eventCtrl.get);
+  // router.route('/event/:user/:webhook').post(eventCtrl.insert);
+  // router.route('/event/:user/:id').put(eventCtrl.update);
+  router.route('/event/:user/:id').delete(eventCtrl.delete);
   
   // Apply the routes to our application with the prefix /api
   app.use('/api', router);

@@ -10,8 +10,10 @@ const eventSchema = new mongoose.Schema({
   	type: mongoose.Schema.Types.ObjectId, 
   	ref: 'Webhook'
   },
+
+  headers: {type: mongoose.Schema.Types.Mixed},
   
-  data: {type: mongoose.Schema.Types.Mixed},
+  payloads: {type: mongoose.Schema.Types.Mixed},
 
   created: {
   	type: Date, 

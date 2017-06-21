@@ -1,0 +1,22 @@
+.table td, .table th {
+   text-align: center;
+   max-width: 25%;
+}
+
+.event-item {
+	cursor: pointer;
+	&:hover {
+		background-color: #d0d0d0;
+	}
+}
+.event-item.selected {
+	background-color: #c5c5c5;
+}
+
+.headers-viewer pre {
+    height: 350px;
+}
+
+.payloads-viewer pre {
+    height: 350px;
+}

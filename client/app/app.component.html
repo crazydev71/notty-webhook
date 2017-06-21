@@ -5,11 +5,14 @@
       <a routerLink="/" class="nav-item nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
         <i class="fa fa-home"></i> Home
       </a>
-      <a routerLink="/cats" class="nav-item nav-link" routerLinkActive="active">
+      <!-- <a routerLink="/cats" class="nav-item nav-link" routerLinkActive="active">
         <i class="fa fa-list"></i> Cats
-      </a>
+      </a> -->
       <a routerLink="/webhooks" class="nav-item nav-link" routerLinkActive="active" *ngIf="auth.loggedIn">
         <i class="fa fa-list"></i> Webhooks
+      </a>
+      <a routerLink="/events" class="nav-item nav-link" routerLinkActive="active" *ngIf="auth.loggedIn">
+        <i class="fa fa-list"></i> Events
       </a>
       <a routerLink="/login" class="nav-item nav-link" routerLinkActive="active" *ngIf="!auth.loggedIn">
         <i class="fa fa-sign-in"></i> Login
