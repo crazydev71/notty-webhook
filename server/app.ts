@@ -81,12 +81,15 @@ db.once('open', () => {
   /*let httpServer = http.createServer(app).listen(app.get('port'), () => {
     console.log('HTTP server is listening on port ' + app.get('port'));
   });*/
-  app.listen(app.get('port'), () => {
-    console.log('Angular Full Stack listening on port ' + app.get('port'));
+  const httpPort = process.env.PORT_HTTP || 80;
+  app.listen(httpPort, () => {
+    console.log('HTTP server is listening on port ' + httpPort);
   });
+
   // Setting up Https Server
-  let httpsServer = https.createServer(credentials, app).listen(app.get('port')+1, () => {
-  	console.log('HTTPS secure server is listening on port ' + (app.get('port') + 1));
+  const httpsPort = process.env.PORT_HTTPS || 443;
+  let httpsServer = https.createServer(credentials, app).listen(httpsPort, () => {
+  	console.log('HTTPS secure server is listening on port ' + httpsPort);
   });
 });
 
