@@ -21,7 +21,7 @@ const app = express();
 
 // Configuration
 dotenv.load({ path: '.env' });
-app.set('port', (process.env.PORT || 3000));
+// app.set('port', (process.env.PORT || 3000));
 
 const privateKey = fs.readFileSync(path.join(__dirname, '../../secure/key.pem'), 'utf8');
 const certificate = fs.readFileSync(path.join(__dirname, '../../secure/cert.pem'), 'utf8');
