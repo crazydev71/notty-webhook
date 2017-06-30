@@ -1,0 +1,1 @@
+{"version":3,"file":"cat.js","sourceRoot":"","sources":["../../../server/models/cat.ts"],"names":[],"mappings":";;AAAA,mCAAqC;AAErC,IAAM,SAAS,GAAG,IAAI,QAAQ,CAAC,MAAM,CAAC;IACpC,IAAI,EAAE,MAAM;IACZ,MAAM,EAAE,MAAM;IACd,GAAG,EAAE,MAAM;CACZ,CAAC,CAAC;AAEH,IAAM,GAAG,GAAG,QAAQ,CAAC,KAAK,CAAC,KAAK,EAAE,SAAS,CAAC,CAAC;AAE7C,kBAAe,GAAG,CAAC"}
