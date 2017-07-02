@@ -12,6 +12,7 @@ var cookieParser = require("cookie-parser");
 var passport = require("passport");
 var session = require("express-session");
 var mongoStore = require("connect-mongo");
+var httpsRedirect = require("express-https-redirect");
 var passport_local_1 = require("passport-local");
 var user_1 = require("./models/user");
 var routes_1 = require("./routes");
@@ -50,6 +51,7 @@ app.use(passport.session());
 passport.use(new passport_local_1.Strategy(user_1.default.authenticate()));
 passport.serializeUser(user_1.default.serializeUser());
 passport.deserializeUser(user_1.default.deserializeUser());
+app.use('/', httpsRedirect(true));
 app.use('/', express.static(path.join(__dirname, '../public')));
 // MongoDB connect
 mongoose.connect(process.env.MONGODB_URI);

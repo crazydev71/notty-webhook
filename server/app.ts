@@ -11,6 +11,7 @@ import * as cookieParser from 'cookie-parser';
 import * as passport from 'passport';
 import * as session from 'express-session';
 import * as mongoStore from 'connect-mongo';
+import * as httpsRedirect from 'express-https-redirect';
 import {Strategy} from 'passport-local';
 
 import User from './models/user';
@@ -61,6 +62,8 @@ app.use(passport.session());
 passport.use(new Strategy(User.authenticate())); 
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+
+app.use('/', httpsRedirect(true));
 
 app.use('/', express.static(path.join(__dirname, '../public')));
 
