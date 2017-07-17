@@ -11,6 +11,7 @@ import * as cookieParser from 'cookie-parser';
 import * as passport from 'passport';
 import * as session from 'express-session';
 import * as mongoStore from 'connect-mongo';
+import * as redirectToHTTPS from 'express-http-to-https';
 import * as httpsRedirect from 'express-https-redirect';
 import {Strategy} from 'passport-local';
 
